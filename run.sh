@@ -4,8 +4,9 @@ set -e
 CURRENT_DIR=$(cd `dirname $0`; pwd)
 cd ${CURRENT_DIR}
 
-SCALE=2
+SCALE=100
 FORMAT=parquet
+ITERATIONS=2
 LOCATION="jfs://demo/tmp/performance-datasets/tpcds/sf${SCALE}-parquet/"
 DATABASE=tpcds_${FORMAT}_${SCALE}_jfs
 FILTER_QUERIES="q1-v2.4,q2-v2.4,q3-v2.4"
@@ -40,6 +41,6 @@ set -x
   --location ${LOCATION} \
   --database ${DATABASE} \
   --format ${FORMAT} \
-  --iterations ${SCALE} \
+  --iterations ${ITERATIONS} \
   --filterQueries ${FILTER_QUERIES} \
   --enableHive ${ENABLE_HIVE}
