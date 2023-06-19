@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 
-CURRENT_DIR=$(cd `dirname $0`; pwd)
-cd ${CURRENT_DIR}
-
+################# PARAMETERS #################
 SCALE=100
 FORMAT=parquet
 ITERATIONS=2
@@ -11,6 +9,10 @@ LOCATION="jfs://demo/tmp/performance-datasets/tpcds/sf${SCALE}-parquet/"
 DATABASE=tpcds_${FORMAT}_${SCALE}_jfs
 FILTER_QUERIES="q1-v2.4,q2-v2.4,q3-v2.4"
 ENABLE_HIVE=false
+
+ENABLE_KERBEROS=false
+KEYTAB=/root/hdfs.keytab
+PRINCIPAL=hdfs
 
 SPARK_CONF="
 --master yarn
@@ -23,6 +25,15 @@ SPARK_CONF="
 --conf spark.driver.memoryOverhead=1g
 --conf spark.executor.memoryOverhead=2g
 "
+
+################# PARAMETERS #################
+
+CURRENT_DIR=$(cd `dirname $0`; pwd)
+cd ${CURRENT_DIR}
+
+if $ENABLE_KERBEROS; then
+    SPARK_CONF="${SPARK_CONF} --keytab ${KEYTAB} --principal ${PRINCIPAL}"
+fi
 
 set -x
 # Generate data for tpcds
