@@ -158,7 +158,6 @@ object RunTPCDS {
       callUDF("max", col("runtimeSeconds").cast("long")).as('maxRuntimeSeconds)
     ).orderBy(col("queryName"))
     aggResults.repartition(1).write.csv(s"$resultPath/summary")
-    aggResults.repartition(1).write.save()
     aggResults.show(105)
 
     spark.stop()

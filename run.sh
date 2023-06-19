@@ -15,7 +15,8 @@ SPARK_CONF="
 --driver-memory 4g
 --executor-memory 8G
 --executor-cores 4
---conf spark.sql.shuffle.partitions=10
+--num-executors 4
+--conf spark.sql.adaptive.enabled=true
 --conf spark.driver.memoryOverhead=1g
 --conf spark.executor.memoryOverhead=2g
 "
