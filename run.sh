@@ -31,7 +31,7 @@ set -x
   --format parquet
 
 # Run tpcds benchmark
-/opt/spark/bin/spark-submit ${SPARK_CONF}
+/opt/spark/bin/spark-submit ${SPARK_CONF} \
   --class com.databricks.spark.sql.perf.tpcds.RunTPCDS \
   spark-sql-perf/target/scala-2.12/spark-sql-perf-assembly-0.5.2-SNAPSHOT.jar \
   --location "jfs://demo/tmp/performance-datasets/tpcds/sf2-parquet/" \
