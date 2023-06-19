@@ -8,6 +8,8 @@ SCALE=2
 FORMAT=parquet
 LOCATION="jfs://demo/tmp/performance-datasets/tpcds/sf${SCALE}-parquet/"
 DATABASE=tpcds_${FORMAT}_${SCALE}_jfs
+FILTER_QUERIES="q1-v2.4,q2-v2.4,q3-v2.4"
+ENABLE_HIVE=false
 
 SPARK_CONF="
 --master yarn
@@ -27,17 +29,17 @@ set -x
   --class com.databricks.spark.sql.perf.tpcds.GenTPCDSData \
   spark-sql-perf/target/scala-2.12/spark-sql-perf-assembly-0.5.2-SNAPSHOT.jar \
   --dsdgenTools tpcds-kit/tools.tar.gz \
-  --scaleFactor 2 \
-  --location "jfs://demo/tmp/performance-datasets/tpcds/sf2-parquet/" \
-  --format parquet
+  --scaleFactor ${SCALE} \
+  --location ${LOCATION} \
+  --format ${FORMAT}
 
 # Run tpcds benchmark
 /opt/spark/bin/spark-submit ${SPARK_CONF} \
   --class com.databricks.spark.sql.perf.tpcds.RunTPCDS \
   spark-sql-perf/target/scala-2.12/spark-sql-perf-assembly-0.5.2-SNAPSHOT.jar \
-  --location "jfs://demo/tmp/performance-datasets/tpcds/sf2-parquet/" \
-  --database tpcds_parquet_2_jfs \
-  --format parquet \
-  --iterations 2 \
-  --filterQueries  "q1-v2.4,q2-v2.4,q3-v2.4"
-#  --enableHive true
+  --location ${LOCATION} \
+  --database ${DATABASE} \
+  --format ${FORMAT} \
+  --iterations ${SCALE} \
+  --filterQueries ${FILTER_QUERIES} \
+  --enableHive ${ENABLE_HIVE}
