@@ -117,8 +117,9 @@ object GenTPCDSData {
       useStringForDate = config.useStringForDate)
 
     val start = System.currentTimeMillis()
+    val location = config.location.stripSuffix("/")
     tables.genData(
-      location = config.location,
+      location = location,
       format = config.format,
       overwrite = config.overwrite,
       partitionTables = config.partitionTables,
