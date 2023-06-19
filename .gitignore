@@ -1,0 +1,4 @@
+/.idea/
+/spark-sql-perf/project/target/
+/spark-sql-perf/target/
+/spark-sql-perf/.idea/
