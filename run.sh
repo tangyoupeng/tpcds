@@ -38,5 +38,5 @@ set -x
   --database tpcds_parquet_2_jfs \
   --format parquet \
   --iterations 2 \
-  --filterQueries  "q1-v2.4,q2-v2.4,q3-v2.4" \
-  --enableHive
+  --filterQueries  "q1-v2.4,q2-v2.4,q3-v2.4"
+#  --enableHive true

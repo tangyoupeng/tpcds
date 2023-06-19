@@ -68,7 +68,7 @@ object RunTPCDS {
   private def run(config: RunTPCDSConfig) {
     val location = config.location.stripSuffix("/")
     val database = config.database
-    val resultLocation = location + "/" + "results"
+    val resultLocation = location + "/results"
     val format = config.format
     val iterations = config.iterations
     val optimizeQueries = config.optimizeQueries
@@ -157,7 +157,8 @@ object RunTPCDS {
       callUDF("min", col("runtimeSeconds").cast("long")).as('minRuntimeSeconds),
       callUDF("max", col("runtimeSeconds").cast("long")).as('maxRuntimeSeconds)
     ).orderBy(col("queryName"))
-    aggResults.repartition(1).write.csv(s"$resultPath/summary.csv")
+    aggResults.repartition(1).write.csv(s"$resultPath/summary")
+    aggResults.repartition(1).write.save()
     aggResults.show(105)
 
     spark.stop()
