@@ -7,7 +7,7 @@ FORMAT=parquet
 ITERATIONS=2
 LOCATION="jfs://demo/tmp/performance-datasets/tpcds/sf${SCALE}-parquet/"
 DATABASE=tpcds_${FORMAT}_${SCALE}_jfs
-FILTER_QUERIES="q1-v2.4,q2-v2.4,q3-v2.4"
+FILTER_QUERIES="q1-v2.4,q2-v2.4,q3-v2.4,q4-v2.4,q5-v2.4,q6-v2.4,q7-v2.4,q8-v2.4,q9-v2.4,q10-v2.4"
 ENABLE_HIVE=false
 
 ENABLE_KERBEROS=false
